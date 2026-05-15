@@ -1,14 +1,31 @@
-
 const express = require("express");
 const app = express();
-const PORT = 5050;
+const PORT = process.env.PORT || 8080;
+require('dotenv').config()
 
-app.use(express.json());
+const mongoose = require("mongoose");
+const URI = process.env.MONGODB_URI;
 
-app.get("/",(req,res)=>{
-    res.send("Root route is working");
-})
+const main = async () => {
+  await mongoose.connect(URI);
+};
 
-app.listen(PORT,()=>{
+try {
+  main()
+    .then(() => {
+      console.log("MongoDB - Connected Successfull");
+    })
+    .catch((err) => console.log(err));
+
+  app.use(express.json());
+
+  app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`);
-})
+  });
+} catch (err) {
+  console.log("Err :", err);
+}
+
+app.get("/", (req, res) => {
+  res.send("Root route is working");
+});
