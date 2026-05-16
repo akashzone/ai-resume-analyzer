@@ -1,4 +1,5 @@
 const User = require("../models/User.js");
+const bcrypt = require("bcrypt");
 
 const registerUser = async (req,res)=>{
     const { username, email, password } = req.body;
@@ -11,12 +12,14 @@ const registerUser = async (req,res)=>{
                 message : "User already exist, Login!"
             });
         }
+
+        const hashPassword = await bcrypt.hash(password,10);
         const userData = await User({
             username,
             email,
-            password
+            password : hashPassword
         });
-
+        console.log(userData.password)
         console.log(userData);
         await userData.save();
 
@@ -37,9 +40,9 @@ const loginUser = async(req,res)=>{
     const { email, password } = req.body;
     try{
         const userData = await User.findOne({email});
-        console.log("alreadyExist : ",userData);
+        const isMatch = await bcrypt.compare(password,userData.password);
         if(userData){
-            if (userData.password == password){
+            if (isMatch){
                 res.status(201).json({
                     message: "LoggedIn Successfully",
                     user: userData
