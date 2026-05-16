@@ -5,6 +5,8 @@ require("dotenv").config();
 
 app.use(express.json());
 
+const authRoutes = require("./routes/authRoutes.js");
+
 const mongoose = require("mongoose");
 const URI = process.env.MONGODB_URI;
 
@@ -16,7 +18,6 @@ const startServer = async () => {
     app.listen(PORT, () => {
       console.log(`Server is running on ${PORT}`);
     });
-
   } catch (err) {
     console.log("Err :", err);
   }
@@ -24,6 +25,12 @@ const startServer = async () => {
 
 startServer();
 
-app.get("/", (req, res) => {
-  res.send("Root route is working");
+app.get("/api/health", (req, res) => {
+  res.send({
+    success: true,
+    message: "API is healthy",
+  });
 });
+
+//auth-routes 
+app.use("/api/auth",authRoutes);
