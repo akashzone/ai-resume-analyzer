@@ -9,7 +9,7 @@ app.use(express.json());
 
 const authRoutes = require("./routes/authRoutes.js");
 const profileRoutes = require("./routes/profileRoutes.js");
-const authMiddleware = require("./middleware/authMiddleware.js")
+const resumeRoutes = require("./routes/resumeUploadRoutes.js");
 
 const mongoose = require("mongoose");
 const URI = process.env.MONGODB_URI;
@@ -40,4 +40,7 @@ app.get("/api/health", (req, res) => {
 app.use("/api/auth",authRoutes);
 
 //protected routes
-app.use("/api/protected",authMiddleware,profileRoutes)
+app.use("/api/protected",profileRoutes)
+
+// resume-upload route
+app.use("/api/resumes",resumeRoutes);

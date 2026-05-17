@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const authMiddleware = async (req,res,next)=>{
     const header = req.headers.authorization;
     const token = header.split(" ")[1];
-    console.log(token);
+    // console.log(token);
 
    try{
      if(!token){
@@ -13,8 +13,8 @@ const authMiddleware = async (req,res,next)=>{
         });
     }
     const decode = await jwt.verify(token,JWT_SECRET);
-
-    console.log("Decoded :", decode);
+    req.user = decode;
+    // console.log("Decoded :", decode);
     next()
    }catch(err){
     res.status(401).json({
