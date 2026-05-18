@@ -20,6 +20,10 @@ const resumeSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  extractedText : {
+    type: String,
+    default: ""
+  },
   uploadedAt: {
     type: Date,
     default: Date.now(),

@@ -1,8 +1,9 @@
 const Resume = require("../models/Resume");
+const extractTextFromPDF = require("../utils/pdfParser.js");
 
 const resumeUpload = async(req, res) => {
   const { originalname, filename, destination, size } = req.file;
-
+  const filePath = req.file.path;
   const fileUrl = `http://localhost:8080/uploads/resume/${req.file.filename}`;
 //   console.log(req.user);
   const userId = req.user.id;
@@ -13,6 +14,7 @@ const resumeUpload = async(req, res) => {
         message: "upload the file.",
       });
     }
+    const extractText = await extractTextFromPDF(filePath);
     const uploadFile = new Resume({
       userId,
       fileUrl,
@@ -20,6 +22,7 @@ const resumeUpload = async(req, res) => {
       fileName: filename,
       filePath: destination,
       fileSize: size,
+      extractedText : extractText
     });
     // console.log("uploadFile metadata :",uploadFile);
     await uploadFile.save();
@@ -33,4 +36,4 @@ const resumeUpload = async(req, res) => {
   }
 };
 
-module.exports = { resumeUpload };
+module.exports = { resumeUpload, };
