@@ -36,4 +36,4 @@ const resumeUpload = async(req, res) => {
   }
 };
 
-module.exports = { resumeUpload, };
+module.exports = { resumeUpload };
