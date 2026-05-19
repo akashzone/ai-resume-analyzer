@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const analysisSchema = new mongoos.Schema({
+const analysisSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -14,23 +14,23 @@ const analysisSchema = new mongoos.Schema({
     required: true,
   },
   strengths: {
-    type: String,
+    type: [String],
     required: true,
   },
   weaknesses: {
-    type: String,
+    type: [String],
     required: true,
   },
   missingSkills: {
-    type: String,
+    type: [String],
     required: true,
   },
   suggestions: {
-    type: String,
+    type: [String],
     required: true,
   },
   interviewQuestions: {
-    type: String,
+    type: [String],
     required: true,
   },
   createdAt: {

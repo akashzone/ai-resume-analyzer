@@ -1,5 +1,6 @@
 const Resume = require("../models/Resume");
 const extractTextFromPDF = require("../utils/pdfParser.js");
+// const { geminiResponse } = require("../services/geminiService.js");
 
 const resumeUpload = async(req, res) => {
   const { originalname, filename, destination, size } = req.file;
@@ -14,6 +15,7 @@ const resumeUpload = async(req, res) => {
         message: "upload the file.",
       });
     }
+
     const extractText = await extractTextFromPDF(filePath);
     const uploadFile = new Resume({
       userId,
@@ -26,6 +28,9 @@ const resumeUpload = async(req, res) => {
     });
     // console.log("uploadFile metadata :",uploadFile);
     await uploadFile.save();
+    // console.log("Resume File: ",uploadFile);
+    // console.log("Resume ID: ",uploadFile._id);
+    // const geminiRes = await geminiResponse(uploadFile._id);
     return res.status(201).json({
       message: "Successfully uploaded",
     });

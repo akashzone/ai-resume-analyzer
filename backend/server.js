@@ -6,12 +6,13 @@ require("dotenv").config();
 
 app.use(express.json());
 
-
 const authRoutes = require("./routes/authRoutes.js");
 const profileRoutes = require("./routes/profileRoutes.js");
 const resumeRoutes = require("./routes/resumeUploadRoutes.js");
+const analysisRoutes = require("./routes/analysisRoutes.js");
 
 const mongoose = require("mongoose");
+const Analysis = require("./models/Analysis.js");
 const URI = process.env.MONGODB_URI;
 
 const startServer = async () => {
@@ -44,3 +45,6 @@ app.use("/api/protected",profileRoutes)
 
 // resume-upload route
 app.use("/api/resumes",resumeRoutes);
+
+// geminiAnalysis route
+app.use("/api/analysis",analysisRoutes)

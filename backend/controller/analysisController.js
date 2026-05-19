@@ -1,0 +1,50 @@
+const { geminiResponse } = require("../services/geminiService.js");
+const Analysis = require("../models/Analysis.js");
+const analysisController = async (req, res) => {
+  const { resumeId } = req.params;
+  const { id } = req.user;
+  console.log("User id:",req.user.id)
+  if (!resumeId) {
+    return null;
+  }
+  try {
+    const responseText = await geminiResponse(resumeId);
+    const parsed = JSON.parse(responseText);
+
+    const {
+      atsScore,
+      strengths,
+      weaknesses,
+      missingSkills,
+      suggestions,
+      interviewQuestions,
+    } = parsed;
+
+    const analysisInsights = new Analysis({
+      resumeId,
+      userId : id,
+      atsScore,
+      strengths,
+      weaknesses,
+      missingSkills,
+      suggestions,
+      interviewQuestions,
+    });
+    const saveData = await analysisInsights.save();
+    console.log("Successfully inserted:", saveData);
+
+    res.status(201).json({
+      message: "Successfully saved",
+      insights: saveData,
+    });
+  } catch (err) {
+    console.log("Analysis error:", err);
+
+    res.status(500).json({
+      message: "Error occurred",
+      error: err.message,
+    });
+  }
+};
+
+module.exports = analysisController;
