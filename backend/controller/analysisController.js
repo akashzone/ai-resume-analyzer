@@ -62,4 +62,20 @@ const analysisHistory = async (req,res)=>{
   }
 }
 
-module.exports = { analysisController, analysisHistory };
+const singleAnalysis = async (req,res)=>{
+  const { analysisId } = req.params;
+  if( analysisId ){
+    const insights = await Analysis.findOne({ _id : analysisId});
+    console.log("Insights :",insights);
+    res.status(201).json({
+      message : "Successfully retrieved",
+      insight : insights
+    });
+  }else{
+    return res.status(500).json({
+      message : "analysisId is invalid.."
+    });
+  }
+}
+
+module.exports = { analysisController, analysisHistory, singleAnalysis };
