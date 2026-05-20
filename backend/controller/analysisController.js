@@ -47,4 +47,19 @@ const analysisController = async (req, res) => {
   }
 };
 
-module.exports = analysisController;
+const analysisHistory = async (req,res)=>{
+  const { id } = req.user;
+  if(id){
+    const insightsHistory = await Analysis.find({userId: id}).sort({ createdAt: -1});
+    // console.log("History :",insightsHistory[0]);
+    res.status(201).json({
+      message : "History retrieved successfully",
+      insights : insightsHistory
+    });
+  }
+  else{
+    console.log("ID invalid !");
+  }
+}
+
+module.exports = { analysisController, analysisHistory };
