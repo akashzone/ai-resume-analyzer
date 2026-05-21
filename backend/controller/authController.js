@@ -4,6 +4,19 @@ const generateToken = require("../utils/generateToken.js");
 
 const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
+  if (!username || !email || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  if (!email.includes("@")) {
+    return res.status(400).json({ message: "Invalid email" });
+  }
+
+  if (password.length < 6) {
+    return res
+      .status(400)
+      .json({ message: "Password must be at least 6 characters" });
+  }
 
   try {
     const alreadyExist = await User.findOne({ email });
@@ -25,7 +38,7 @@ const registerUser = async (req, res) => {
     await userData.save();
 
     const token = generateToken(userData._id);
-    console.log("Token :",token);
+    console.log("Token :", token);
     res.status(201).json({
       message: "Registered Successfully.",
       user: {
@@ -45,17 +58,20 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: "Email and password are required" });
+  }
   try {
     const userData = await User.findOne({ email });
     const isMatch = await bcrypt.compare(password, userData.password);
     const token = generateToken(userData._id);
-    console.log("Token :",token);
+    console.log("Token :", token);
     if (userData) {
       if (isMatch) {
         res.status(201).json({
           message: "LoggedIn Successfully",
           user: userData,
-          token
+          token,
         });
       }
     } else {
@@ -64,7 +80,7 @@ const loginUser = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(401).json({
+    res.status(400).json({
       message: "Invalid Data",
     });
   }
