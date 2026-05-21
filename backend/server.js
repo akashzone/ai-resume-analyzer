@@ -10,9 +10,12 @@ const authRoutes = require("./routes/authRoutes.js");
 const profileRoutes = require("./routes/profileRoutes.js");
 const resumeRoutes = require("./routes/resumeUploadRoutes.js");
 const analysisRoutes = require("./routes/analysisRoutes.js");
+const dashboardRoutes = require("./routes/dashboardRoutes.js");
+
 
 const mongoose = require("mongoose");
 const Analysis = require("./models/Analysis.js");
+const dashboardSummary = require("./controller/dashboardConroller.js");
 const URI = process.env.MONGODB_URI;
 
 const startServer = async () => {
@@ -48,3 +51,6 @@ app.use("/api/resumes",resumeRoutes);
 
 // geminiAnalysis route
 app.use("/api/analysis",analysisRoutes)
+
+// dashboard - route
+app.use("/api/dashboard/",dashboardRoutes);

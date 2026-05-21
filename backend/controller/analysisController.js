@@ -50,7 +50,7 @@ const analysisController = async (req, res) => {
 const analysisHistory = async (req,res)=>{
   const { id } = req.user;
   if(id){
-    const insightsHistory = await Analysis.find({userId: id}).sort({ createdAt: -1});
+    const insightsHistory = await Analysis.find({userId: id}).sort({ createdAt: -1}).populate("resumeId", "originalName uploadedAt fileSize");
     // console.log("History :",insightsHistory[0]);
     res.status(201).json({
       message : "History retrieved successfully",
@@ -65,7 +65,7 @@ const analysisHistory = async (req,res)=>{
 const singleAnalysis = async (req,res)=>{
   const { analysisId } = req.params;
   if( analysisId ){
-    const insights = await Analysis.findOne({ _id : analysisId});
+    const insights = await Analysis.findOne({ _id : analysisId}).populate("resumeId", "originalName uploadedAt fileSize");
     console.log("Insights :",insights);
     res.status(201).json({
       message : "Successfully retrieved",

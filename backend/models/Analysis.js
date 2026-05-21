@@ -8,6 +8,7 @@ const analysisSchema = new mongoose.Schema({
   resumeId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
+    ref: 'Resume'
   },
   atsScore: {
     type: Number,
