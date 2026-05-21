@@ -3,7 +3,6 @@ const Analysis = require("../models/Analysis.js");
 const analysisController = async (req, res) => {
   const { resumeId } = req.params;
   const { id } = req.user;
-  console.log("User id:",req.user.id)
   if (!resumeId) {
     return null;
   }
@@ -31,8 +30,6 @@ const analysisController = async (req, res) => {
       interviewQuestions,
     });
     const saveData = await analysisInsights.save();
-    console.log("Successfully inserted:", saveData);
-
     res.status(201).json({
       message: "Successfully saved",
       insights: saveData,
@@ -51,7 +48,6 @@ const analysisHistory = async (req,res)=>{
   const { id } = req.user;
   if(id){
     const insightsHistory = await Analysis.find({userId: id}).sort({ createdAt: -1}).populate("resumeId", "originalName uploadedAt fileSize");
-    // console.log("History :",insightsHistory[0]);
     res.status(201).json({
       message : "History retrieved successfully",
       insights : insightsHistory
@@ -66,7 +62,6 @@ const singleAnalysis = async (req,res)=>{
   const { analysisId } = req.params;
   if( analysisId ){
     const insights = await Analysis.findOne({ _id : analysisId}).populate("resumeId", "originalName uploadedAt fileSize");
-    console.log("Insights :",insights);
     res.status(201).json({
       message : "Successfully retrieved",
       insight : insights

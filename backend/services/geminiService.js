@@ -5,11 +5,9 @@ const ai = new GoogleGenAI({ apiKey: key });
 const Resume = require("../models/Resume");
 
 async function geminiResponse(resumeID) {
-  console.log("Resume Id :", resumeID);
   const resumeData = await Resume.findOne({
     _id: resumeID,
   });
-  // console.log("resumeText :",resumeData.extractedText);
   const prompt = resumeData.extractedText;
 
   const response = await ai.models.generateContent({

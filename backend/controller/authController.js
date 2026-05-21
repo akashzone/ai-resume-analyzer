@@ -38,7 +38,6 @@ const registerUser = async (req, res) => {
     await userData.save();
 
     const token = generateToken(userData._id);
-    console.log("Token :", token);
     res.status(201).json({
       message: "Registered Successfully.",
       user: {

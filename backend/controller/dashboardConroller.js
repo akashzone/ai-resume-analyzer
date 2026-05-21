@@ -14,8 +14,6 @@ const dashboardSummary = async (req, res) => {
       avg = element + avg;
     }
     const averageATSScore = avg / analysisInsights.length;
-    console.log(" Average ATS score :", averageATSScore);
-
     const latestAnalysis = {
       atsScore: analysisInsights[0].atsScore,
       createdAt: analysisInsights[0].createdAt.toISOString().split("T")[0]
