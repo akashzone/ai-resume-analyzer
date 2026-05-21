@@ -21,7 +21,7 @@ const analysisController = async (req, res) => {
 
     const analysisInsights = new Analysis({
       resumeId,
-      userId : id,
+      userId: id,
       atsScore,
       strengths,
       weaknesses,
@@ -44,33 +44,38 @@ const analysisController = async (req, res) => {
   }
 };
 
-const analysisHistory = async (req,res)=>{
+const analysisHistory = async (req, res) => {
   const { id } = req.user;
-  if(id){
-    const insightsHistory = await Analysis.find({userId: id}).sort({ createdAt: -1}).populate("resumeId", "originalName uploadedAt fileSize");
+  if (id) {
+    const insightsHistory = await Analysis.find({ userId: id })
+      .sort({ createdAt: -1 })
+      .populate("resumeId", "originalName uploadedAt fileSize");
     res.status(201).json({
-      message : "History retrieved successfully",
-      insights : insightsHistory
+      message: "History retrieved successfully",
+      insights: insightsHistory,
     });
-  }
-  else{
+  } else {
     console.log("ID invalid !");
   }
-}
+};
 
-const singleAnalysis = async (req,res)=>{
+const singleAnalysis = async (req, res) => {
   const { analysisId } = req.params;
-  if( analysisId ){
-    const insights = await Analysis.findOne({ _id : analysisId}).populate("resumeId", "originalName uploadedAt fileSize");
+  if (analysisId) {
+    const insights = await Analysis.findOne({ _id: analysisId }).populate(
+      "resumeId",
+      "originalName uploadedAt fileSize",
+    );
+    if (!insights) {
+      throw new Error("AnalysisId is Invalid..");
+    }
     res.status(201).json({
-      message : "Successfully retrieved",
-      insight : insights
+      message: "Successfully retrieved",
+      insight: insights,
     });
-  }else{
-    return res.status(500).json({
-      message : "analysisId is invalid.."
-    });
+  } else {
+    throw new Error("AnalysisId is Empty");
   }
-}
+};
 
 module.exports = { analysisController, analysisHistory, singleAnalysis };

@@ -48,10 +48,7 @@ const registerUser = async (req, res) => {
       token,
     });
   } catch (err) {
-    res.status(500).json({
-      message: "Error occurred",
-      error: err.message,
-    });
+    throw new Error(err.message);
   }
 };
 
@@ -74,14 +71,10 @@ const loginUser = async (req, res) => {
         });
       }
     } else {
-      res.status(401).json({
-        message: "User not exist",
-      });
+      throw new Error("User not exist, Signup first")
     }
   } catch (err) {
-    res.status(400).json({
-      message: "Invalid Data",
-    });
+    throw new Error(err.message);
   }
 };
 

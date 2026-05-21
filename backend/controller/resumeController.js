@@ -1,7 +1,7 @@
 const Resume = require("../models/Resume");
 const extractTextFromPDF = require("../utils/pdfParser.js");
 
-const resumeUpload = async(req, res) => {
+const resumeUpload = async (req, res) => {
   const { originalname, filename, destination, size } = req.file;
   const filePath = req.file.path;
   const fileUrl = `http://localhost:8080/uploads/resume/${req.file.filename}`;
@@ -10,7 +10,7 @@ const resumeUpload = async(req, res) => {
   try {
     if (!req.file) {
       return res.status(401).json({
-        message: "upload the file.",
+        message: "File not uploaded.",
       });
     }
 
@@ -22,15 +22,14 @@ const resumeUpload = async(req, res) => {
       fileName: filename,
       filePath: destination,
       fileSize: size,
-      extractedText : extractText
+      extractedText: extractText,
     });
     await uploadFile.save();
-    return res.status(201).json({
-      message: "Successfully uploaded",
-    });
+    return res.status(201).json({ success: true, message: "Resume uploaded successfully" });
   } catch (err) {
     return res.status(401).json({
-        message : `Err : ${err}`
+      success: false,
+      message: `Err : ${err}`,
     });
   }
 };

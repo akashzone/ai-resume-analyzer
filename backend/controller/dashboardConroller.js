@@ -28,10 +28,7 @@ const dashboardSummary = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({
-      message: "Error occurred",
-      error: err.message,
-    });
+    throw new Error(err.message);
   }
 };
 

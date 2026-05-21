@@ -11,6 +11,7 @@ const profileRoutes = require("./routes/profileRoutes.js");
 const resumeRoutes = require("./routes/resumeUploadRoutes.js");
 const analysisRoutes = require("./routes/analysisRoutes.js");
 const dashboardRoutes = require("./routes/dashboardRoutes.js");
+const errorMiddleware = require("./middleware/errorMiddleware");
 
 
 const mongoose = require("mongoose");
@@ -54,3 +55,7 @@ app.use("/api/analysis",analysisRoutes)
 
 // dashboard - route
 app.use("/api/dashboard/",dashboardRoutes);
+
+
+// error middlelware 
+app.use(errorMiddleware);
