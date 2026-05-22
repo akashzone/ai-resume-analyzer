@@ -1,0 +1,28 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  background-color: black;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  color: white;
+  padding: 0 10px;
+}
+
+.links{
+  padding: 25px;
+}
+
+.nav-links {
+
+  text-decoration: none;
+  padding: 10px;
+  color: white;
+}
