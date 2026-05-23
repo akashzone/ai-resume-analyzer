@@ -1,10 +1,11 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8080;
-
+const cors = require("cors");
 require("dotenv").config();
 
 app.use(express.json());
+app.use(cors());
 
 const authRoutes = require("./routes/authRoutes.js");
 const profileRoutes = require("./routes/profileRoutes.js");
@@ -18,6 +19,8 @@ const mongoose = require("mongoose");
 const Analysis = require("./models/Analysis.js");
 const dashboardSummary = require("./controller/dashboardConroller.js");
 const URI = process.env.MONGODB_URI;
+
+
 
 const startServer = async () => {
   try {
