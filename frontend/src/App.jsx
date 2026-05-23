@@ -5,6 +5,7 @@ import Home from './pages/Home.jsx';
 import Dashboard from './pages/Dashboard.jsx'
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
+import ProtectedRoute from "./components/ProtectedRoute.jsx"
 import './App.css'
 
 
@@ -12,13 +13,18 @@ function App() {
 
   return (
     <>
-    <Navbar/>
-    <Routes>
-      <Route path="/" element={<Home/>}  />
-      <Route path="/dashboard" element={<Dashboard/>}  />
-      <Route path="/login" element={<Login/>} />
-      <Route path="/signup" element={<Signup/>} />
-    </Routes>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
     </>
   )
 }

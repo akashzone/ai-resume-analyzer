@@ -34,3 +34,11 @@ nav {
   justify-content: center;
   align-items: center;
 }
+
+.nav-button{
+  color: black;
+  background-color: beige;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: none;
+}
