@@ -1,13 +1,13 @@
 import React from 'react'
 import api from "../service/api.js"
 import { useState } from 'react';
+import { useAuth } from "../context/AuthContext.jsx"
 
 const Login = () => {
+  const { login, logout } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
   const userLogin = async (e) => {
-
     e.preventDefault();
     try {
       const response = await api.post(
@@ -17,8 +17,8 @@ const Login = () => {
           password
         }
       )
-
       console.log("Response :", response.data);
+      login(response.data.token,response.data.user); //function that stores the token and user data in LocalStorage.
     } catch (err) {
       console.log("Err :", err);
     }

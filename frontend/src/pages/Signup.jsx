@@ -1,9 +1,10 @@
 import React from 'react'
 import api from "../service/api.js"
 import { useState } from 'react';
+import { useAuth } from "../context/AuthContext.jsx";
 
 const Signup = () => {
-
+  const { login, logout } = useAuth();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,8 +21,9 @@ const Signup = () => {
           password
         }
       )
-
+      login(response.data.token,response.data.user);
       console.log("Response :", response.data);
+
     } catch (err) {
       console.log("Err :", err);
     }
@@ -70,4 +72,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Signup;
