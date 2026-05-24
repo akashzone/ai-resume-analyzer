@@ -17,11 +17,7 @@ const ResumeUpload = () => {
     const formData = new FormData();
     formData.append("file", file);
     try {
-      const response = await api.post("/resumes/upload", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      });
+      const response = await api.post("/resumes/upload", formData);
       console.log(response.data);
     } catch (err) {
       console.log(err.response?.data || err.message);
