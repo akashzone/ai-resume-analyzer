@@ -6,7 +6,6 @@ const ProtectedRoute = ({children}) => {
 
   const {token} = useAuth();
   if(!token){
-    alert("Loggin first");
     return <Navigate to="/login" />;
   }
   return children

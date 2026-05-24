@@ -2,11 +2,13 @@ import React from 'react'
 import api from "../service/api.js"
 import { useState } from 'react';
 import { useAuth } from "../context/AuthContext.jsx"
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { login, logout } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const userLogin = async (e) => {
     e.preventDefault();
     try {
@@ -19,6 +21,7 @@ const Login = () => {
       )
       console.log("Response :", response.data);
       login(response.data.token,response.data.user); //function that stores the token and user data in LocalStorage.
+      navigate("/dashboard");
     } catch (err) {
       console.log("Err :", err);
     }

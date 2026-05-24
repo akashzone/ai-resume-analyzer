@@ -41,4 +41,5 @@ nav {
   border-radius: 20px;
   padding: 10px 20px;
   border: none;
+  cursor: pointer;
 }

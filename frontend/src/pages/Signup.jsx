@@ -2,12 +2,14 @@ import React from 'react'
 import api from "../service/api.js"
 import { useState } from 'react';
 import { useAuth } from "../context/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const { login, logout } = useAuth();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const userSignUp = async (e) => {
 
@@ -21,9 +23,8 @@ const Signup = () => {
           password
         }
       )
-      login(response.data.token,response.data.user);
-      console.log("Response :", response.data);
-
+      login(response.data.token, response.data.user);
+      navigate("/dashboard");
     } catch (err) {
       console.log("Err :", err);
     }
