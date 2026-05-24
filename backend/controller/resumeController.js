@@ -9,6 +9,9 @@ const resumeUpload = async (req, res) => {
 
   try {
     if (!req.file) {
+      console.log(
+        "File not uploaded."
+      )
       return res.status(401).json({
         message: "File not uploaded.",
       });
@@ -24,8 +27,8 @@ const resumeUpload = async (req, res) => {
       fileSize: size,
       extractedText: extractText,
     });
-    await uploadFile.save();
-    return res.status(201).json({ success: true, message: "Resume uploaded successfully" });
+    const saveFile = await uploadFile.save();
+    return res.status(201).json({ success: true, message: "Resume uploaded successfully",resumeDetails:saveFile });
   } catch (err) {
     return res.status(401).json({
       success: false,

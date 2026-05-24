@@ -5,7 +5,9 @@ import Home from './pages/Home.jsx';
 import Dashboard from './pages/Dashboard.jsx'
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
-import ProtectedRoute from "./components/ProtectedRoute.jsx"
+import ResumeUpload from './pages/ResumeUpload.jsx';
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+
 import './App.css'
 
 
@@ -22,6 +24,13 @@ function App() {
               <Dashboard />
             </ProtectedRoute>
           } />
+        <Route path="/upload"
+          element={
+            <ProtectedRoute>
+              <ResumeUpload />
+            </ProtectedRoute>
+          } />
+
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

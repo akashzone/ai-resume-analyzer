@@ -43,3 +43,21 @@ nav {
   border: none;
   cursor: pointer;
 }
+
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.upload-btn{
+  color: white;
+  background-color: orange;
+    border-radius: 20px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}

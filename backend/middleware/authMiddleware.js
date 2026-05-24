@@ -2,6 +2,9 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const jwt = require("jsonwebtoken");
 const authMiddleware = async (req, res, next) => {
   const header = req.headers.authorization;
+  if (!header) {
+    return next(new Error("No token found"));
+  }
   const token = header.split(" ")[1];
 
   try {
