@@ -7,6 +7,7 @@ import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import ResumeUpload from './pages/ResumeUpload.jsx';
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import AnalysisPage from "./pages/AnalysisPage.jsx";
 
 import './App.css'
 
@@ -28,6 +29,13 @@ function App() {
           element={
             <ProtectedRoute>
               <ResumeUpload />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/analysis/:analysisId"
+          element={
+            <ProtectedRoute>
+              <AnalysisPage/>
             </ProtectedRoute>
           } />
 
