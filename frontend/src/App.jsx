@@ -32,7 +32,7 @@ function App() {
             </ProtectedRoute>
           } />
 
-          <Route path="/analysis/:analysisId"
+          <Route path="/analysis/:resumeId"
           element={
             <ProtectedRoute>
               <AnalysisPage/>
