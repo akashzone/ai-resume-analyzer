@@ -2,28 +2,61 @@ const Analysis = require("../models/Analysis");
 const Resume = require("../models/Resume");
 
 const dashboardSummary = async (req, res) => {
-  const { id } = req.user;
   try {
-    const analysisInsights = await Analysis.find({ userId: id });
-    const analysisCount = analysisInsights.length;
-    const resumes = await Resume.find({ userId: id }).sort({ createdAt: -1 });
-    const resumeCount = resumes.length;
-    let avg = 0;
-    for (let i = 0; i < analysisInsights.length; i++) {
-      let element = analysisInsights[i].atsScore;
-      avg = element + avg;
+    const { id } = req.user;
+
+    if (!id) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized. User id missing.",
+      });
     }
-    const averageATSScore = avg / analysisInsights.length;
-    const latestAnalysis = {
-      atsScore: analysisInsights[0].atsScore,
-      createdAt: analysisInsights[0].createdAt.toISOString().split("T")[0]
-    };
-    res.status(201).json({
+
+    const analyses = await Analysis.find({ userId: id }).sort({
+      createdAt: -1,
+    });
+
+    const resumes = await Resume.find({ userId: id }).sort({
+      createdAt: -1,
+    });
+
+    if (analyses.length === 0 && resumes.length === 0) {
+      return res.status(200).json({
+        success: true,
+        summary: {
+          totalResumes: 0,
+          totalAnalyses: 0,
+          averageATSScore: 0,
+          latestAnalysis: null,
+          message: "Upload your first resume to see analytics.",
+        },
+      });
+    }
+
+    let totalATS = 0;
+
+    for (let i = 0; i < analyses.length; i++) {
+      totalATS += analyses[i].atsScore || 0;
+    }
+
+    const averageATSScore =
+      analyses.length > 0 ? Math.round(totalATS / analyses.length) : 0;
+
+    const latestAnalysis =
+      analyses.length > 0
+        ? {
+            id: analyses[0]._id,
+            atsScore: analyses[0].atsScore,
+            createdAt: analyses[0].createdAt.toISOString().split("T")[0],
+          }
+        : null;
+
+    res.status(200).json({
       success: true,
       summary: {
-        totalResumes: resumeCount,
-        totalAnalyses: analysisCount,
-        averageATSScore: averageATSScore,
+        totalResumes: resumes.length,
+        totalAnalyses: analyses.length,
+        averageATSScore,
         latestAnalysis,
       },
     });
