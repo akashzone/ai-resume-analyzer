@@ -8,6 +8,7 @@ import Signup from './pages/Signup.jsx';
 import ResumeUpload from './pages/ResumeUpload.jsx';
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import AnalysisPage from "./pages/AnalysisPage.jsx";
+import HistoryPage from "./pages/HistoryPage.jsx";
 
 import './App.css'
 
@@ -36,6 +37,12 @@ function App() {
           element={
             <ProtectedRoute>
               <AnalysisPage/>
+            </ProtectedRoute>
+          } />
+          <Route path="/analysis/history"
+          element={
+            <ProtectedRoute>
+              <HistoryPage/>
             </ProtectedRoute>
           } />
 

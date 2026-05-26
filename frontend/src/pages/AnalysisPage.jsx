@@ -7,7 +7,7 @@ import "../styles/AnalysisPage.css";
 
 const AnalysisPage = () => {
   const { resumeId } = useParams();
-  const [analysis, setAnalysis] = useState("");
+  const [analysis, setAnalysis] = useState(null);
 
   useEffect(() => {
     const getReport = async () => {
@@ -23,6 +23,10 @@ const AnalysisPage = () => {
     }
     getReport();
   }, [resumeId]);
+
+  if (!analysis) {
+    return <p>Loading report...</p>;
+  }
   return (
     <div className="report-container">
       <h1 className="report-title">
@@ -38,7 +42,7 @@ const AnalysisPage = () => {
         <h2>Strengths</h2>
 
         <ul>
-          {analysis.strengths.map((item, index) => (
+          {analysis.strengths?.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
@@ -48,7 +52,7 @@ const AnalysisPage = () => {
         <h2>Weaknesses</h2>
 
         <ul>
-          {analysis.weaknesses.map((item, index) => (
+          {analysis.weaknesses?.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
@@ -58,7 +62,7 @@ const AnalysisPage = () => {
         <h2>Missing Skills</h2>
 
         <ul>
-          {analysis.missingSkills.map((item, index) => (
+          {analysis.missingSkills?.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
@@ -68,7 +72,7 @@ const AnalysisPage = () => {
         <h2>Suggestions</h2>
 
         <ul>
-          {analysis.suggestions.map((item, index) => (
+          {analysis.suggestions?.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
@@ -78,7 +82,7 @@ const AnalysisPage = () => {
         <h2>Interview Questions</h2>
 
         <ul>
-          {analysis.interviewQuestions.map((item, index) => (
+          {analysis.interviewQuestions?.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>

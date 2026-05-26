@@ -50,6 +50,13 @@ const analysisHistory = async (req, res) => {
     const insightsHistory = await Analysis.find({ userId: id })
       .sort({ createdAt: -1 })
       .populate("resumeId", "originalName uploadedAt fileSize");
+
+    if (insightsHistory.length === 0) {
+      res.status(201).json({
+        message: "Upload resume and Analys it to see history",
+        insights: 0,
+      });
+    }
     res.status(201).json({
       message: "History retrieved successfully",
       insights: insightsHistory,
