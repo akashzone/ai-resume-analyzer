@@ -5,7 +5,8 @@
 }
 
 .home-container {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
+  overflow: hidden;
   background-color: #f9fafb;
   font-family: Arial, sans-serif;
 }

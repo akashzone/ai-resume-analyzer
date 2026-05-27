@@ -3,6 +3,7 @@ import api from "../service/api.js"
 import { useState } from 'react';
 import { useAuth } from "../context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
+import "../styles/Signup.css";
 
 const Signup = () => {
   const { login, logout } = useAuth();
@@ -31,45 +32,61 @@ const Signup = () => {
   }
 
   return (
-    <>
-      <div className="signup-form">
-        <div>
-          <h1>
-            SignUp page
-          </h1>
-        </div>
-        <form onSubmit={userSignUp}>
-          Username :
-          <input
-            value={username}
-            placeholder="Enter username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <br></br>
-          <br></br>
-          Email :
-          <input
-            value={email}
-            type="email"
-            placeholder="Enter email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br></br>
-          <br></br>
-          Password :
-          <input
-            value={password}
-            placeholder="Enter password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br></br>
-          <br></br>
-          <button>
-            Submit
+    <div className="signup-container">
+
+      <div className="signup-card">
+
+        <h1 className="signup-title">
+          Create Account
+        </h1>
+
+        <p className="signup-subtitle">
+          Start analyzing your resume with AI-powered insights.
+        </p>
+
+        <form onSubmit={userSignUp} className="signup-form">
+
+          <div className="form-group">
+            <label>Username</label>
+
+            <input
+              value={username}
+              placeholder="Enter username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Email</label>
+
+            <input
+              value={email}
+              type="email"
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Password</label>
+
+            <input
+              value={password}
+              type="password"
+              placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <button className="signup-btn">
+            Create Account
           </button>
+
         </form>
+
       </div>
-    </>
+
+    </div>
   )
 }
 

@@ -3,28 +3,3 @@
   margin: 0;
 }
 
-.signup-form{
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  justify-content: center;
-  align-items: center;
-}
-
-.container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 20px;
-  padding-top: 20px;
-}
-
-.upload-btn{
-  color: white;
-  background-color: orange;
-    border-radius: 20px;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-}
