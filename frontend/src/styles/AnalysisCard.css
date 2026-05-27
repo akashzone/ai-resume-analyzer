@@ -1,9 +1,12 @@
+
+
 .analysis-card {
   background-color: white;
   border: 1px solid #e5e7eb;
+  max-width: 60vw;
   border-radius: 12px;
   padding: 24px;
-  margin-bottom: 20px;
+  margin: 20px;
   transition: 0.2s ease;
 }
 

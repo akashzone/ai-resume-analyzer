@@ -3,45 +3,12 @@
   margin: 0;
 }
 
-nav {
-  display: flex;
-  align-items: center;
-  gap: 34px;
-  background-color: black;
-  justify-content: space-between;
-}
-
-.nav-logo {
-  color: white;
-  padding: 0 10px;
-}
-
-.links{
-  padding: 25px;
-}
-
-.nav-links {
-
-  text-decoration: none;
-  padding: 10px;
-  color: white;
-}
-
 .signup-form{
   display: flex;
   flex-direction: column;
   gap: 25px;
   justify-content: center;
   align-items: center;
-}
-
-.nav-button{
-  color: black;
-  background-color: beige;
-  border-radius: 20px;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
 }
 
 .container{

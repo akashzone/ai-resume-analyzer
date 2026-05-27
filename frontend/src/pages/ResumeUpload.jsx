@@ -3,6 +3,7 @@ import { useState } from 'react';
 import api from "../service/api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import "../styles/ResumeUpload.css";
 
 const ResumeUpload = () => {
   const navigate = useNavigate();
@@ -34,21 +35,53 @@ const ResumeUpload = () => {
   }
   return (
     <>
-      <div className="container">
-        <h1>ResumeUpload Page</h1>
+      <div className="upload-container">
+
+        <h1 className="upload-title">
+          Upload Your Resume
+        </h1>
+
+        <p className="upload-subtitle">
+          Upload your resume and get AI-powered ATS analysis,
+          strengths, weaknesses, missing skills, and interview questions.
+        </p>
+
         <form onSubmit={handleUpload}>
-          <input
-            type="file"
-            onChange={(e) => { setFile(e.target.files[0]) }}
-          ></input><br></br><br></br>
-          <button>Upload Resume</button>
+
+          <div className="upload-box">
+
+            <input
+              type="file"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+
+            {file && (
+              <p className="file-name">
+                Selected File: {file.name}
+              </p>
+            )}
+
+          </div>
+
+          <button className="upload-btn">
+            Upload Resume
+          </button>
+
         </form>
-        {
-          AnalysisId ?
-            <form onSubmit={handleAnalysis}>
-              <button>Analysis</button>
-            </form> : ""
-        }
+
+        {AnalysisId && (
+          <div className="analysis-wrapper">
+
+            <button
+              className="analysis-btn"
+              onClick={handleAnalysis}
+            >
+              View Analysis
+            </button>
+
+          </div>
+        )}
+
       </div>
     </>
   )
