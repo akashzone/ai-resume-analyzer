@@ -35,6 +35,7 @@ const HistoryPage = () => {
           resumeName={item.resumeId.originalName}
           atsScore={item.atsScore}
           date={item.createdAt}
+          analysisId={item._id}
         />
       ))}
       </div>

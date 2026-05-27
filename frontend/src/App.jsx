@@ -9,6 +9,7 @@ import ResumeUpload from './pages/ResumeUpload.jsx';
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import AnalysisPage from "./pages/AnalysisPage.jsx";
 import HistoryPage from "./pages/HistoryPage.jsx";
+import ReportPage from "./pages/ReportPage.jsx";
 
 import './App.css'
 
@@ -33,16 +34,24 @@ function App() {
             </ProtectedRoute>
           } />
 
-          <Route path="/analysis/:resumeId"
+        <Route path="/analysis/:analysisId"
           element={
             <ProtectedRoute>
-              <AnalysisPage/>
+              <ReportPage />
             </ProtectedRoute>
           } />
-          <Route path="/analysis/history"
+
+        <Route path="/analysis/:resumeId"
           element={
             <ProtectedRoute>
-              <HistoryPage/>
+              <AnalysisPage />
+            </ProtectedRoute>
+          } />
+
+        <Route path="/analysis/history"
+          element={
+            <ProtectedRoute>
+              <HistoryPage />
             </ProtectedRoute>
           } />
 
