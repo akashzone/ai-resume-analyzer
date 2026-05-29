@@ -8,7 +8,7 @@ import "../styles/ResumeUpload.css";
 const ResumeUpload = () => {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
-  const [AnalysisId, setAnalysisId] = useState("");
+  const [resumeId, setResumeId] = useState("");
   const { token } = useAuth();
   const handleUpload = async (e) => {
 
@@ -22,7 +22,7 @@ const ResumeUpload = () => {
     try {
       const response = await api.post("/resumes/upload", formData);
       console.log("ID: ", response.data.resumeDetails._id);
-      setAnalysisId(response.data.resumeDetails._id);
+      setResumeId(response.data.resumeDetails._id);
       console.log(response.data);
     } catch (err) {
       console.log(err.response?.data || err.message);
@@ -31,7 +31,7 @@ const ResumeUpload = () => {
 
   const handleAnalysis = (e) => {
     e.preventDefault();
-    return navigate(`/analysis/${AnalysisId}`);
+    return navigate(`/analysis/${resumeId}`);
   }
   return (
     <>
@@ -69,7 +69,7 @@ const ResumeUpload = () => {
 
         </form>
 
-        {AnalysisId && (
+        {resumeId && (
           <div className="analysis-wrapper">
 
             <button

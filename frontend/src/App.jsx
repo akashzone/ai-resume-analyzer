@@ -34,19 +34,23 @@ function App() {
             </ProtectedRoute>
           } />
 
-        <Route path="/analysis/:analysisId"
+        <Route
+          path="/report/:analysisId"
           element={
             <ProtectedRoute>
               <ReportPage />
             </ProtectedRoute>
-          } />
+          }
+        />
 
-        <Route path="/analysis/:resumeId"
+        <Route
+          path="/analysis/:resumeId"
           element={
             <ProtectedRoute>
               <AnalysisPage />
             </ProtectedRoute>
-          } />
+          }
+        />
 
         <Route path="/analysis/history"
           element={

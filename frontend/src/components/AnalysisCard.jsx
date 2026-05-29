@@ -12,7 +12,7 @@ const AnalysisCard = ({
   const navigate = useNavigate();
 
   const handleViewReport = () => {
-    navigate(`/analysis/${analysisId}`);
+    navigate(`/report/${analysisId}`);
   };
 
   return (

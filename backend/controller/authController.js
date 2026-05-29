@@ -54,25 +54,37 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
+
   if (!email || !password) {
-    return res.status(400).json({ message: "Email and password are required" });
+    return res.status(400).json({
+      message: "Email and password are required",
+    });
   }
+
   try {
     const userData = await User.findOne({ email });
-    const isMatch = await bcrypt.compare(password, userData.password);
-    const token = generateToken(userData._id);
-    console.log("Token :", token);
-    if (userData) {
-      if (isMatch) {
-        res.status(201).json({
-          message: "LoggedIn Successfully",
-          user: userData,
-          token,
-        });
-      }
-    } else {
-      throw new Error("User not exist, Signup first")
+
+    if (!userData) {
+      throw new Error("User not exist, Signup first");
     }
+
+    const isMatch = await bcrypt.compare(password, userData.password);
+
+    if (!isMatch) {
+      throw new Error("Invalid email or password");
+    }
+
+    const token = generateToken(userData._id);
+
+    return res.status(200).json({
+      message: "LoggedIn Successfully",
+      user: {
+        id: userData._id,
+        username: userData.username,
+        email: userData.email,
+      },
+      token,
+    });
   } catch (err) {
     throw new Error(err.message);
   }
