@@ -1,68 +1,94 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .home-container {
   min-height: calc(100vh - 80px);
-  overflow: hidden;
-  background-color: #f9fafb;
-  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
 }
 
-
 .hero-section {
-  max-width: 800px;
-  margin: 120px auto;
+  max-width: 850px;
+  margin: 40px auto;
   text-align: center;
-  padding: 20px;
+  padding: 40px;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow), var(--shadow-glow);
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-section h1 {
-  font-size: 52px;
-  color: #111827;
-  line-height: 1.2;
+  font-size: 48px;
+  line-height: 1.25;
   margin-bottom: 24px;
+  background: linear-gradient(135deg, var(--text-bright) 20%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero-section p {
-  font-size: 18px;
-  color: #6b7280;
-  line-height: 1.7;
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.8;
   margin-bottom: 40px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
 }
-
 
 .hero-buttons {
   display: flex;
   justify-content: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .primary-btn,
 .secondary-btn {
-  padding: 14px 24px;
+  padding: 14px 30px;
   border-radius: 10px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  border: none;
+  transition: var(--transition);
 }
 
 .primary-btn {
-  background-color: #111827;
-  color: white;
+  background-color: var(--primary);
+  color: var(--text-bright);
+  border: 1px solid var(--primary);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
 }
 
 .primary-btn:hover {
-  background-color: #1f2937;
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
 }
 
 .secondary-btn {
-  background-color: white;
-  border: 1px solid #d1d5db;
+  background-color: rgba(255, 255, 255, 0.03);
+  color: var(--text-main);
+  border: 1px solid var(--border);
 }
 
 .secondary-btn:hover {
-  background-color: #f3f4f6;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
 }
