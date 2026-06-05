@@ -1,34 +1,36 @@
 .login-container {
-  min-height: 100vh;
-  background-color: #f9fafb;
+  min-height: calc(100vh - 80px);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 40px 20px;
 }
 
 .login-card {
   width: 100%;
-  max-width: 430px;
-  background-color: white;
-  padding: 40px;
-  border-radius: 18px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.06);
+  max-width: 440px;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  padding: 45px 40px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.5s ease-out;
 }
 
 .login-title {
   text-align: center;
-  font-size: 36px;
-  color: #111827;
+  font-size: 34px;
+  color: var(--text-bright);
   margin-bottom: 10px;
 }
 
 .login-subtitle {
   text-align: center;
-  color: #6b7280;
+  color: var(--text-muted);
   margin-bottom: 35px;
   line-height: 1.6;
+  font-size: 15px;
 }
 
 .login-form {
@@ -44,21 +46,26 @@
 
 .form-group label {
   margin-bottom: 8px;
-  color: #111827;
+  color: var(--text-main);
   font-weight: 600;
+  font-size: 14px;
 }
 
 .form-group input {
   padding: 14px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border);
+  background-color: rgba(255, 255, 255, 0.02);
+  color: var(--text-bright);
   border-radius: 10px;
   font-size: 15px;
   outline: none;
-  transition: 0.2s ease;
+  transition: var(--transition);
 }
 
 .form-group input:focus {
-  border-color: #111827;
+  border-color: var(--primary);
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
 }
 
 .login-btn {
@@ -66,13 +73,17 @@
   padding: 14px;
   border: none;
   border-radius: 10px;
-  background-color: #111827;
-  color: white;
+  background-color: var(--primary);
+  color: var(--text-bright);
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
 }
 
 .login-btn:hover {
-  background-color: #1f2937;
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
 }
