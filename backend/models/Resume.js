@@ -26,7 +26,7 @@ const resumeSchema = new mongoose.Schema({
   },
   uploadedAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
 });
 
