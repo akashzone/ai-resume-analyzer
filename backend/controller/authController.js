@@ -48,7 +48,7 @@ const registerUser = async (req, res) => {
       token,
     });
   } catch (err) {
-    throw new Error(err.message);
+    return res.status(500).json({ message: "Internal server error during registration", error: err.message });
   }
 };
 
@@ -65,13 +65,13 @@ const loginUser = async (req, res) => {
     const userData = await User.findOne({ email });
 
     if (!userData) {
-      throw new Error("User not exist, Signup first");
+      return res.status(404).json({ message: "User does not exist, signup first" });
     }
 
     const isMatch = await bcrypt.compare(password, userData.password);
 
     if (!isMatch) {
-      throw new Error("Invalid email or password");
+      return res.status(401).json({ message: "Invalid email or password" });
     }
 
     const token = generateToken(userData._id);
@@ -86,7 +86,7 @@ const loginUser = async (req, res) => {
       token,
     });
   } catch (err) {
-    throw new Error(err.message);
+    return res.status(500).json({ message: "Internal server error during login", error: err.message });
   }
 };
 
