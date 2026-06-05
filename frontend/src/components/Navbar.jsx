@@ -15,7 +15,7 @@ const Navbar = () => {
                 <div className="links">
                     {
                         token ? <>
-                        <Link to="/dashboard" className="nav-links" >Dashborad</Link>
+                        <Link to="/dashboard" className="nav-links" >Dashboard</Link>
                         <Link to="/upload" className="nav-links" >Upload</Link>
                         <Link to="/analysis/history" className="nav-links" >History</Link>
                         <button onClick={logout} className="nav-button" >Logout</button>
