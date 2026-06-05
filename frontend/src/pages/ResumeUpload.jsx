@@ -2,14 +2,12 @@ import React from 'react'
 import { useState } from 'react';
 import api from "../service/api";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext.jsx";
 import "../styles/ResumeUpload.css";
 
 const ResumeUpload = () => {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [resumeId, setResumeId] = useState("");
-  const { token } = useAuth();
   const handleUpload = async (e) => {
 
     e.preventDefault();
@@ -52,6 +50,7 @@ const ResumeUpload = () => {
 
             <input
               type="file"
+              accept=".pdf"
               onChange={(e) => setFile(e.target.files[0])}
             />
 
