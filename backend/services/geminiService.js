@@ -11,7 +11,7 @@ async function geminiResponse(resumeID) {
   const prompt = resumeData.extractedText;
 
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-2.5-flash",
     contents: `
     Analyze the following resume and return ONLY a valid raw JSON object. Do not include markdown, explanations, notes, backticks, or any extra text.
 
