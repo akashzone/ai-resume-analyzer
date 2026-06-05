@@ -1,4 +1,3 @@
-import React from 'react'
 import api from "../service/api.js"
 import { useState } from 'react';
 import { useAuth } from "../context/AuthContext.jsx";
@@ -6,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/Signup.css";
 
 const Signup = () => {
-  const { login, logout } = useAuth();
+  const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

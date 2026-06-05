@@ -1,4 +1,3 @@
-import React from "react";
 import api from "../service/api.js";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";

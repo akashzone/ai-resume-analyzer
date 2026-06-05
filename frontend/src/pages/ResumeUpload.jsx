@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState } from 'react';
 import api from "../service/api";
 import { useNavigate } from "react-router-dom";

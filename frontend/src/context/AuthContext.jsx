@@ -1,5 +1,6 @@
 
 
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
@@ -11,7 +12,7 @@ export const AuthProvider = ({children})=>{
         const savedUser = localStorage.getItem("user");
         try {
             return savedUser ? JSON.parse(savedUser) : null;
-        } catch (e) {
+        } catch {
             return null;
         }
     });

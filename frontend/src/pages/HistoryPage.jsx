@@ -1,4 +1,3 @@
-import React from 'react'
 import AnalysisCard from "../components/AnalysisCard"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
