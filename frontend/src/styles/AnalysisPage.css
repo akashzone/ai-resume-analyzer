@@ -1,42 +1,73 @@
-body {
-  background-color: #f4f4f4;
-  font-family: Arial, sans-serif;
-}
-
 .report-container {
-  max-width: 900px;
-  margin: 40px auto;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
+  max-width: 950px;
+  margin: 50px auto;
+  padding: 40px;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.6s ease-out;
 }
 
 .report-title {
   text-align: center;
-  margin-bottom: 30px;
+  font-size: 38px;
+  background: linear-gradient(135deg, var(--text-bright) 20%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 40px;
 }
 
 .score-card {
-  background-color: #111827;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 30px;
+  background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
+  border: 1px solid var(--primary);
+  color: var(--text-bright);
+  padding: 35px;
+  border-radius: 20px;
   text-align: center;
+  margin-bottom: 35px;
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.15);
+}
+
+.score-card h2 {
+  font-size: 20px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
 }
 
 .score-card p {
-  font-size: 40px;
-  font-weight: bold;
+  font-size: 64px;
+  font-weight: 800;
+  color: var(--secondary);
+  font-family: var(--font-display);
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
 }
 
 .section {
-  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 25px;
+  transition: var(--transition);
+}
+
+.section:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
 }
 
 .section h2 {
-  margin-bottom: 10px;
-  color: #111827;
+  color: var(--text-bright);
+  font-size: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  border-left: 4px solid var(--primary);
+  padding-left: 12px;
 }
 
 .section ul {
@@ -44,6 +75,12 @@ body {
 }
 
 .section li {
-  margin-bottom: 10px;
-  line-height: 1.6;
+  color: var(--text-main);
+  margin-bottom: 12px;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.section li::marker {
+  color: var(--primary);
 }
