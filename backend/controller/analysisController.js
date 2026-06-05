@@ -4,7 +4,9 @@ const analysisController = async (req, res) => {
   const { resumeId } = req.params;
   const { id } = req.user;
   if (!resumeId) {
-    return null;
+    return res.status(400).json({
+      message: "resumeId parameter is required",
+    });
   }
   try {
     const responseText = await geminiResponse(resumeId);
@@ -45,43 +47,62 @@ const analysisController = async (req, res) => {
 };
 
 const analysisHistory = async (req, res) => {
-  const { id } = req.user;
-  if (id) {
+  try {
+    const { id } = req.user;
+    if (!id) {
+      return res.status(401).json({
+        message: "User ID invalid or empty!",
+      });
+    }
+
     const insightsHistory = await Analysis.find({ userId: id })
       .sort({ createdAt: -1 })
       .populate("resumeId", "originalName uploadedAt fileSize");
 
     if (insightsHistory.length === 0) {
-      res.status(201).json({
-        message: "Upload resume and Analys it to see history",
-        insights: 0,
+      return res.status(200).json({
+        message: "Upload resume and analyze it to see history",
+        insights: [],
       });
     }
-    res.status(201).json({
+    return res.status(200).json({
       message: "History retrieved successfully",
       insights: insightsHistory,
     });
-  } else {
-    console.log("ID invalid !");
+  } catch (err) {
+    return res.status(500).json({
+      message: "Error retrieving history",
+      error: err.message,
+    });
   }
 };
 
 const singleAnalysis = async (req, res) => {
-  const { analysisId } = req.params;
-  if (analysisId) {
+  try {
+    const { analysisId } = req.params;
+    if (!analysisId) {
+      return res.status(400).json({
+        message: "AnalysisId is Empty",
+      });
+    }
     const insights = await Analysis.findOne({ _id: analysisId }).populate(
       "resumeId",
       "originalName uploadedAt fileSize",
     );
     if (!insights) {
-      throw new Error("AnalysisId is Invalid..");
+      return res.status(404).json({
+        message: "AnalysisId is Invalid..",
+      });
     }
-    res.status(201).json({
+    return res.status(200).json({
       message: "Successfully retrieved",
       insight: insights,
     });
-  } else {
-    throw new Error("AnalysisId is Empty");
+  } catch (err) {
+    return res.status(500).json({
+      message: "Error retrieving analysis details",
+      error: err.message,
+    });
   }
 };
 
