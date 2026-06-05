@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 8080;
 const cors = require("cors");
@@ -6,6 +7,7 @@ require("dotenv").config();
 
 app.use(express.json());
 app.use(cors());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const authRoutes = require("./routes/authRoutes.js");
 const profileRoutes = require("./routes/profileRoutes.js");
@@ -17,7 +19,6 @@ const errorMiddleware = require("./middleware/errorMiddleware");
 
 const mongoose = require("mongoose");
 const Analysis = require("./models/Analysis.js");
-const dashboardSummary = require("./controller/dashboardConroller.js");
 const URI = process.env.MONGODB_URI;
 
 
