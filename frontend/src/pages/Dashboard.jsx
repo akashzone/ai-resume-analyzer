@@ -2,11 +2,13 @@ import React from "react";
 import api from "../service/api.js";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext.jsx";
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [summary, setSummary] = useState(null);
+  const { user } = useAuth();
 
   const handleUpload = () => {
     navigate("/upload");
@@ -33,7 +35,7 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <div className="dashboard-header">
         <div>
-          <p className="welcome-text">Welcome Back, <b>Akash</b></p>
+          <p className="welcome-text">Welcome Back, <b>{user?.username || "User"}</b></p>
           <h1>Dashboard</h1>
         </div>
 
