@@ -10,7 +10,13 @@ const analysisController = async (req, res) => {
   }
   try {
     const responseText = await geminiResponse(resumeId);
-    const parsed = JSON.parse(responseText);
+    let cleanedText = responseText.trim();
+    if (cleanedText.startsWith("```")) {
+      cleanedText = cleanedText.replace(/^```json\s*/i, "").replace(/^```\s*/, "");
+      cleanedText = cleanedText.replace(/\s*```$/, "");
+      cleanedText = cleanedText.trim();
+    }
+    const parsed = JSON.parse(cleanedText);
 
     const {
       atsScore,

@@ -43,6 +43,9 @@ Return the response in this exact JSON structure:
   ]
 }
     `,
+    config: {
+      responseMimeType: "application/json",
+    },
   });
   return response.text;
 }
